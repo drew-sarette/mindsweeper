@@ -1,0 +1,28 @@
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background-color: black;
+}
+
+.game-area {
+  display: grid;
+  grid: 40px 40px 40px / 40px 40px 40px;
+  gap: 4px;
+  background-color: black;
+}
+
+.mine {
+  background-color: red;
+}
+
+.safe {
+  background-color: light-gray;
+}
+
+div {
+  background-color: white;
+}
