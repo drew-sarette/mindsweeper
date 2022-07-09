@@ -1,7 +1,7 @@
 /* Global Variables */
 let squares = [];
 let map = [];
-let sideNum = 3;
+let sideNum = 4;
 
 const startBtn = document.getElementById("start");
 startBtn.addEventListener("click", initialize);
@@ -62,7 +62,7 @@ Tried using splice() to actually remove the elements and shorten the array, but 
 function eliminateEdgeCases(adjacentIndexes, position) {
   if (position % sideNum === 0) { //on left edge of map, remove left side of adjacentIndexes
     adjacentIndexes[0] = null; adjacentIndexes[3] = null; adjacentIndexes[5] = null;
-  } else if (position % sideNum === 2) { //on right edge of map, remove right side
+  } else if (position % sideNum === (sideNum - 1)) { //on right edge of map, remove right side
     adjacentIndexes[2] = null; adjacentIndexes[4] = null; adjacentIndexes[7] = null;
   }
 
