@@ -15,7 +15,7 @@ function initialize() {
   for (let i = 0; i < numSquares; i++) {
     map.push(writeToMap());
     squares[i].addEventListener("click", handleMove);
-    squares[i].setAttribute("id", i);
+    squares[i].setAttribute("id", i); // Is there a way I can get the number of the div from the event object to use in handleMove()? Storing it as an ID seems wrong.
   }
 }
 
@@ -32,7 +32,7 @@ function writeToMap() {
 
 /* Check if the clicked square was a mine, then apply the appropriate CSS class. */
 function handleMove(e) {
-  let clickedSquare = parseInt(e.target.getAttribute("id")); //this seems bad!
+  let clickedSquare = parseInt(e.target.getAttribute("id")); //this seems bad! Need to convert the id attribute to a number
   if (map[clickedSquare] === true) {
     e.target.style.background = "red";
   } else {
@@ -41,6 +41,7 @@ function handleMove(e) {
   }
 }
 
+/* Create an array containing all adjacent indexes, then remove the ones that are "off of the map".  Check map[] at each index to count the mines. */
 function countMines(position) {
   let adjacentIndexes = [];
   let numMines = 0;
@@ -53,7 +54,6 @@ function countMines(position) {
       numMines++;
     }
   });
-  alert(numMines);
   return numMines;
 }
 
