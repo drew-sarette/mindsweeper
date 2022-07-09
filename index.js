@@ -57,6 +57,8 @@ function countMines(position) {
   return numMines;
 }
 
+/*Test if the clicked square was on any edges, and take out the adjacent indexes that are off the edge
+Tried using splice() to actually remove the elements and shorten the array, but it also left them present with a value of null*/
 function eliminateEdgeCases(adjacentIndexes, position) {
   if (position % sideNum === 0) { //on left edge of map, remove left side of adjacentIndexes
     adjacentIndexes[0] = null; adjacentIndexes[3] = null; adjacentIndexes[5] = null;
