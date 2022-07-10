@@ -10,7 +10,8 @@ body {
 
 .game-area {
   display: grid;
-  grid: 40px 40px 40px 40px / 40px 40px 40px 40px;
+  grid-template-columns: repeat(40px, 5);
+  grid-template-rows: repeat(40px, 5);
   gap: 4px;
   background-color: black;
 }

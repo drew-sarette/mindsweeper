@@ -8,15 +8,33 @@ startBtn.addEventListener("click", initialize);
 
 /* Create an array with a boolean for each div, representing the presence of a mine. Set a click-event listener for each square.  */
 function initialize() {
-  // later: call function to generate any size map
+  document.getElementById("game-area").innerHTML = "";
+  makeSquares();
   let squares = document.getElementsByTagName("div");
   let numSquares = squares.length;
   map = [];
   for (let i = 0; i < numSquares; i++) {
     map.push(writeToMap());
     squares[i].addEventListener("click", handleMove);
-    squares[i].setAttribute("id", i); // Is there a way I can get the number of the div from the event object to use in handleMove()? Storing it as an ID seems wrong.
+    //squares[i].setAttribute("id", i); // Is there a way I can get the number of the div from the event object to use in handleMove()? Storing it as an ID seems wrong.
   }
+}
+
+/*Empty the game area and refill it with the specified number of squares */
+function makeSquares() {
+  let gameArea = document.getElementById("game-area");
+  let newSideNum = document.getElementById("side-length").value;
+  console.log(newSideNum);
+  gameArea.style.cssText = 'display: grid;';
+  gameArea.style.gridTemplateColumns = 'repeat(' + newSideNum + ', 40px)';
+  gameArea.style.gridTemplateRows = 'repeat(' + newSideNum + ', 40px)';
+  gameArea.style.gap = '4px';
+  for (let i = 0; i < Math.pow(newSideNum, 2); i++) {
+  let div = document.createElement("div");
+  div.id = i;
+  gameArea.appendChild(div);
+}
+sideNum = newSideNum;
 }
 
 /* Return a random Boolean with a (1 / probabilityOfMine) chance of being true */
