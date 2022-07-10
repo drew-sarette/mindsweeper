@@ -23,8 +23,7 @@ function initialize() {
 /*Empty the game area and refill it with the specified number of squares */
 function makeSquares() {
   let gameArea = document.getElementById("game-area");
-  let newSideNum = document.getElementById("side-length").value;
-  console.log(newSideNum);
+  let newSideNum = parseInt(document.getElementById("side-length").value);
   gameArea.style.cssText = 'display: grid;';
   gameArea.style.gridTemplateColumns = 'repeat(' + newSideNum + ', 40px)';
   gameArea.style.gridTemplateRows = 'repeat(' + newSideNum + ', 40px)';
@@ -65,7 +64,7 @@ function countMines(position) {
   let numMines = 0;
   adjacentIndexes.push(position - sideNum - 1, position - sideNum, position - sideNum + 1);
   adjacentIndexes.push(position - 1,                               position + 1);
-  adjacentIndexes.push(position + sideNum - 1, position + sideNum, position + sideNum + 1);
+  adjacentIndexes.push((position + sideNum - 1), (position + sideNum), (position + sideNum + 1));
   adjacentIndexes = eliminateEdgeCases(adjacentIndexes, position);
   adjacentIndexes.forEach(element => {
     if (map[element] === true){
