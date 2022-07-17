@@ -10,7 +10,7 @@ startBtn.addEventListener("click", initialize);
 function initialize() {
   document.getElementById("game-area").innerHTML = "";
   makeSquares();
-  let squares = document.getElementsByTagName("div");
+  let squares = document.getElementsByClassName("game-square");
   let numSquares = squares.length;
   map = [];
   for (let i = 0; i < numSquares; i++) {
@@ -24,21 +24,22 @@ function initialize() {
 function makeSquares() {
   let gameArea = document.getElementById("game-area");
   let newSideNum = parseInt(document.getElementById("side-length").value);
-  gameArea.style.cssText = 'display: grid;';
-  gameArea.style.gridTemplateColumns = 'repeat(' + newSideNum + ', 40px)';
-  gameArea.style.gridTemplateRows = 'repeat(' + newSideNum + ', 40px)';
-  gameArea.style.gap = '4px';
+  gameArea.style.cssText = "display: grid;";
+  gameArea.style.gridTemplateColumns = "repeat(" + newSideNum + ", 40px)";
+  gameArea.style.gridTemplateRows = "repeat(" + newSideNum + ", 40px)";
+  gameArea.style.gap = "4px";
   for (let i = 0; i < Math.pow(newSideNum, 2); i++) {
-  let div = document.createElement("div");
-  div.id = i;
-  gameArea.appendChild(div);
-}
-sideNum = newSideNum;
+    let div = document.createElement("div");
+    div.id = i;
+    div.classList.add("game-square");
+    gameArea.appendChild(div);
+  }
+  sideNum = newSideNum;
 }
 
 /* Return a random Boolean with a (1 / probabilityOfMine) chance of being true */
 function writeToMap() {
-  const probabilityOfMine = 3;
+  const probabilityOfMine = 4;
   let someNum = Math.floor(Math.random() * probabilityOfMine);
   if (someNum === 0) {
     return true;
@@ -62,12 +63,20 @@ function handleMove(e) {
 function countMines(position) {
   let adjacentIndexes = [];
   let numMines = 0;
-  adjacentIndexes.push(position - sideNum - 1, position - sideNum, position - sideNum + 1);
-  adjacentIndexes.push(position - 1,                               position + 1);
-  adjacentIndexes.push((position + sideNum - 1), (position + sideNum), (position + sideNum + 1));
+  adjacentIndexes.push(
+    position - sideNum - 1,
+    position - sideNum,
+    position - sideNum + 1
+  );
+  adjacentIndexes.push(position - 1, position + 1);
+  adjacentIndexes.push(
+    position + sideNum - 1,
+    position + sideNum,
+    position + sideNum + 1
+  );
   adjacentIndexes = eliminateEdgeCases(adjacentIndexes, position);
-  adjacentIndexes.forEach(element => {
-    if (map[element] === true){
+  adjacentIndexes.forEach((element) => {
+    if (map[element] === true) {
       numMines++;
     }
   });
@@ -77,16 +86,28 @@ function countMines(position) {
 /*Test if the clicked square was on any edges, and take out the adjacent indexes that are off the edge
 Tried using splice() to actually remove the elements and shorten the array, but it also left them present with a value of null*/
 function eliminateEdgeCases(adjacentIndexes, position) {
-  if (position % sideNum === 0) { //on left edge of map, remove left side of adjacentIndexes
-    adjacentIndexes[0] = null; adjacentIndexes[3] = null; adjacentIndexes[5] = null;
-  } else if (position % sideNum === (sideNum - 1)) { //on right edge of map, remove right side
-    adjacentIndexes[2] = null; adjacentIndexes[4] = null; adjacentIndexes[7] = null;
+  if (position % sideNum === 0) {
+    //on left edge of map, remove left side of adjacentIndexes
+    adjacentIndexes[0] = null;
+    adjacentIndexes[3] = null;
+    adjacentIndexes[5] = null;
+  } else if (position % sideNum === sideNum - 1) {
+    //on right edge of map, remove right side
+    adjacentIndexes[2] = null;
+    adjacentIndexes[4] = null;
+    adjacentIndexes[7] = null;
   }
 
-  if (position < (sideNum - 1)) { // on top edge, remove top
-    adjacentIndexes[0] = null; adjacentIndexes[1] = null; adjacentIndexes[2] = null;
-  } else if (position > (Math.pow(sideNum, 2) - sideNum - 1)){ // on bottom edge, remove bottom
-    adjacentIndexes[5] = null; adjacentIndexes[6] = null; adjacentIndexes[7] = null;
+  if (position < sideNum - 1) {
+    // on top edge, remove top
+    adjacentIndexes[0] = null;
+    adjacentIndexes[1] = null;
+    adjacentIndexes[2] = null;
+  } else if (position > Math.pow(sideNum, 2) - sideNum - 1) {
+    // on bottom edge, remove bottom
+    adjacentIndexes[5] = null;
+    adjacentIndexes[6] = null;
+    adjacentIndexes[7] = null;
   }
   return adjacentIndexes;
 }

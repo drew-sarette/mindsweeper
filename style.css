@@ -1,19 +1,29 @@
-body {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
+* {
   background-color: black;
+  color: white;
+  box-sizing: border-box;
+}
+h1 {
+  text-align: center;
 }
 
-.game-area {
-  display: grid;
-  grid-template-columns: repeat(40px, 5);
-  grid-template-rows: repeat(40px, 5);
-  gap: 4px;
-  background-color: black;
+#main-menu {
+  position: fixed;
+  z-index: 1;
+  top: 1em;
+  right: 1em;
+  height: 3em;
+  width: 3em;
+}
+
+.content-item {
+  display: none;
+}
+
+/* missing left col on small displays. Help? Position relative was my only idea, didn't work. */
+#game-area {
+  overflow-x: scroll;
+  padding: 1em;
 }
 
 .mine {
@@ -24,6 +34,36 @@ body {
   background-color: light-gray;
 }
 
-div {
+.game-square {
   background-color: white;
+  color: black;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-around;
+  padding: 1em;
+  border: 4px solid #f73d93;
+  border-radius: 4px;
+}
+
+.controls > button {
+  flex-basis: 40%;
+}
+
+.controls > input {
+  width: 3em;
+  background-color: black;
+  text-align: center;
+}
+
+.controls > label {
+}
+
+footer {
+  text-align: center;
 }
