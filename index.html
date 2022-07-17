@@ -1,54 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>MindSweeper</title>
-</head>
+  </head>
   <body>
     <div class="banner">
       <h1>MindSweeper</h1>
-      <button id="main-menu">
-       ?
-      </button>
-    </div>  
+      <button id="main-menu-button">?</button>
+    </div>
     <div class="content-area">
-      <ul class="content-tabs">
-        </li class="menu-item how-to-play">how to play</li>
-        <li class="menu-item about">about</li>
-        <li class="menu-item contact">contact</li>
-      </ul>
-      <div class="content-item how-to-play">
-        <h2 class="content-header">how to play</h2>
-          <p>Enter a number N between 0 and 600, and hit start to generate a N x N Minesweeper grid! Each square has a 1/3 chance of being a mine. If you click on a safe square, the number of adjacent mines will be displayed. If not... well you know</p>
+      <div class="content-item">
+        <h2>how to play</h2>
+        <div>
+          <p>
+            Enter a number N between 0 and 600, and hit start to generate a N x
+            N Minesweeper grid! Each square has a 1/4 chance of being a mine. If
+            you click on a safe square, the number of adjacent mines will be
+            displayed. If not, well, you know...
+          </p>
+        </div>
       </div>
-      <div class="content-item about">
-        <h2 class="content-header">about</h2>
-        <p>This was written to practice interacting with the DOM, generating HTML, and event listeners in JS, as well as responsive CSS. It is also my final project for Web Dev 1 at Code Louisville!</p>
+      <div class="content-item">
+        <h2>about</h2>
+        <div>
+          <p>
+            This was written to practice interacting with the DOM, generating
+            HTML and event listeners in JS, as well as responsive CSS. It is
+            also my final project for Web Dev 1 at Code Louisville!
+          </p>
+        </div>
       </div>
-      <div class="content-item contact">
-        <h2 class="content-header">contact</h2>
-        <p>Get in touch with me if you have any comments on my projects, or want to work together!</p>
+      <div class="content-item">
+        <h2>contact</h2>
+        <div>
+          <p>
+            Get in touch with me if you have any comments on my projects, or
+            want to work together!
+          </p>
           <ul>
             <li><a href="">email</a></li>
             <li><a href="">github</a></li>
             <li><a href="">linkedin</a></li>
           </ul>
+        </div>
       </div>
     </div>
     <div class="controls">
-      <label for="side-length">Enter side <br> length:</label>
+      <label for="side-length"
+        >Enter side <br />
+        length:</label
+      >
       <input id="side-length" type="text" />
       <button id="start">start</button>
     </div>
-    <div id="game-area">
-    
-    </div>
+    <div id="game-area"></div>
     <footer>
       <p>Drew Sarette, 2022</p>
     </footer>
+    <script src="game.js"></script>
     <script src="index.js"></script>
   </body>
 </html>

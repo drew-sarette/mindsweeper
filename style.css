@@ -3,11 +3,12 @@
   color: white;
   box-sizing: border-box;
 }
+/* Banner==================================================================================================== */
 h1 {
   text-align: center;
 }
-
-#main-menu {
+/* Menu ===================================================================================================== */
+#main-menu-button {
   position: fixed;
   z-index: 1;
   top: 1em;
@@ -16,11 +17,29 @@ h1 {
   width: 3em;
 }
 
-.content-item {
+.content-area {
   display: none;
+  background-color: hsla(240, 53%, 40%, 0.9)
 }
 
-/* missing left col on small displays. Help? Position relative was my only idea, didn't work. */
+.show-main-menu {
+  display: block;
+  position: fixed;
+  padding: 1em;
+  border-radius: 10px;
+  z-index: 1;
+  background-color: hsla(240, 53%, 40%, 0.9);
+}
+
+.show-content-item {
+  display: block;
+}
+
+.content-item * {
+  background-color: hsla(240, 53%, 40%, 0.9);
+}
+
+/* Game ================================================================================================================================ */
 #game-area {
   overflow-x: scroll;
   padding: 1em;
@@ -43,6 +62,7 @@ h1 {
   font-size: x-large;
 }
 
+/* controls =========================================================================================================== */
 .controls {
   display: flex;
   justify-content: space-around;
