@@ -12,6 +12,7 @@ h1 {
 }
 /* Menu ===================================================================================================== */
 #main-menu-button {
+  display:block;
   position: fixed;
   z-index: 1;
   top: 1em;
@@ -22,7 +23,7 @@ h1 {
 
 .content-area {
   display: none;
-  background-color: hsla(240, 53%, 40%, 0.9)
+  background-color: rgb(48, 48, 156);
 }
 
 .show-main-menu {
@@ -31,7 +32,8 @@ h1 {
   padding: 2em;
   border-radius: 10px;
   z-index: 1;
-  background-color: hsla(240, 53%, 40%, 0.9);
+  background-color: rgb(48, 48, 156);
+  grid-template-areas: c;
 }
 
 .show-content-item {
@@ -39,7 +41,7 @@ h1 {
 }
 
 .content-item * {
-  background-color: hsla(240, 53%, 40%, 0.9);
+  background-color: rgb(48, 48, 156);
 }
 
 /* Game ================================================================================================================================ */
@@ -70,7 +72,7 @@ h1 {
   display: flex;
   justify-content: space-around;
   padding: 1em;
-  background-color: #c0c0c0
+  background-color: #c0c0c0;
 }
 
 .controls > button {
@@ -82,7 +84,7 @@ h1 {
 
 .controls > input {
   width: 3em;
-  background-color:#c0c0c0;
+  background-color: #c0c0c0;
   border: 2px solid #7b7b7b;
   color: #0000ff;
   text-align: center;
@@ -90,26 +92,70 @@ h1 {
 
 .controls > label {
   background-color: inherit;
-  color: #007b00
+  color: #007b00;
 }
 
 footer {
   text-align: center;
 }
+
 /* For medium screens ======================================================*/
 @media only screen and (min-width: 768px) {
   body {
     display: grid;
-    grid-template-columns: 175px auto;
+    grid-template-columns: 250px auto;
     grid-template-rows: fit-content fill fit-content;
-    grid-template-areas: 
+    grid-template-areas:
       "a a"
       "b c"
-      "d d"
+      "d d";
   }
 
   .banner {
     grid-area: a;
   }
 
+  .controls {
+    grid-area: b;
+    height: 81vh;
+    align-items: flex-start;
+    gap: 1em;
+    padding: 1em;
+  }
+
+  .show-main-menu {
+    display:static;
+   grid-area: c;
+   top:5em;
+   left:260px;
+   padding: 1em;
+   
+  }
+
+  .controls * {
+    height: 5em;
+  }
+
+  footer {
+    grid-area: d;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  body {
+    display: grid;
+    grid-template-columns: 250px 250px auto;
+    grid-template-rows: fit-content fill fit-content;
+    grid-template-areas:
+      "a a a"
+      "b c d"
+      "e e e";
+  }
+  
+  #game-area {
+    grid-area: d;
+  }
+  footer {
+    grid-area: e;
+  }
 } 
