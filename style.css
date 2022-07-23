@@ -28,6 +28,10 @@ h1 {
 
 .show-main-menu {
   display: block;
+  position: fixed;
+  top: 81.1px;
+  left: 0;
+  right: 0;
   background-color: rgb(48, 48, 156);
 }
 
@@ -108,6 +112,10 @@ footer {
 
   .banner {
     grid-area: banner;
+  }
+
+  .show-main-menu {
+    left: 60%;
   }
 
   .misc-container {
