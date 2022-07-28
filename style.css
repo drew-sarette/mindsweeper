@@ -10,8 +10,8 @@ body {
 h1 {
   text-align: center;
 }
-/* Menu ===================================================================================================== */
-#main-menu-button {
+/* Help ===================================================================================================== */
+#help-button {
   position: fixed;
   z-index: 1;
   top: 1.8em;
@@ -20,18 +20,26 @@ h1 {
   width: 3em;
 }
 
-.content-area {
+.help-area {
   display: none;
-  background-color: rgb(48, 48, 156);
 }
 
-.show-main-menu {
+.show-help {
   display: block;
   position: fixed;
   top: 81.1px;
   left: 0;
   right: 0;
   background-color: rgb(48, 48, 156);
+}
+
+.help-item ul {
+  list-style: none;
+  display:flex;
+  justify-content: space-around;
+}
+
+.help-item a {
 }
 
 /* Game ================================================================================================================================ */
@@ -91,9 +99,9 @@ footer {
   text-align: center;
 }
 
-/* scores */
+/* Scrolling Container*/
 
-.scores {
+.scroll-container {
   display: none;
 }
 
@@ -102,10 +110,11 @@ footer {
   body {
     display: grid;
     grid-template-columns: 250px auto;
-    grid-template-rows: fit-content auto fit-content;
+    grid-template-rows: fit-content auto auto fit-content;
     grid-template-areas:
       "banner banner"
-      "misc game"
+      "controls game"
+      "scroll-container game"
       "foot foot";
   }
 
@@ -113,21 +122,59 @@ footer {
     grid-area: banner;
   }
 
-  .show-main-menu {
+  .show-help {
     left: 60%;
   }
 
-  .misc-container {
-    grid-area: misc;
-    display: flex;
-    flex-direction: column;
+  .controls {
+    grid-area: controls;
   }
 
-  .scores {
-    grid-area: misc;
-    display:block;
-  }
+  .scroll-container {          /* thanks to Jamie Juviler's tutorial at https://blog.hubspot.com/website/scrolling-text-css */
+    grid-area: scroll-container;
+    display: block;
+    overflow: hidden;
 
+  }
+/* animation not for evaluation as part of project, coppied and pasted for learning purposes, soon to be reworked */
+  .scroll-text {
+    height: 100%;
+  text-align: center;
+  
+  /* animation properties */
+  -moz-transform: translateY(100%);
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  
+  -moz-animation: my-animation 5s linear infinite;
+  -webkit-animation: my-animation 5s linear infinite;
+  animation: my-animation 5s linear infinite;
+}
+
+/* for Firefox */
+@-moz-keyframes my-animation {
+  from { -moz-transform: translateY(100%); }
+  to { -moz-transform: translateY(-100%); }
+}
+
+/* for Chrome */
+@-webkit-keyframes my-animation {
+  from { -webkit-transform: translateY(100%); }
+  to { -webkit-transform: translateY(-100%); }
+}
+
+@keyframes my-animation {
+  from {
+    -moz-transform: translateY(100%);
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+  }
+  to {
+    -moz-transform: translateY(-100%);
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+  }
+}
   footer {
     grid-area: foot;
   }
@@ -138,12 +185,12 @@ footer {
 @media only screen and (min-width: 992px) {
   body {
     display: grid;
-    grid-template-columns: 400px auto;
+    grid-template-columns: 250px 250px auto;
     grid-template-rows: fit-content fill fill fit-content;
     grid-template-areas:
-      "banner banner"
-      "misc game"
-      "foot foot";
+      "banner banner banner"
+      "scroll-container controls game"
+      "foot foot foot";
   }
 
   #game-area {

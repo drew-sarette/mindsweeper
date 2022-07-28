@@ -1,5 +1,5 @@
-document.getElementById("main-menu-button").addEventListener("click", toggleMenu);
+document.getElementById("help-button").addEventListener("click", toggleMenu);
 
 function toggleMenu() {
-    document.querySelector(".content-area").classList.toggle("show-main-menu");
+    document.querySelector(".help-area").classList.toggle("show-help");
 }
