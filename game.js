@@ -24,6 +24,7 @@ function initialize() {
 function makeSquares() {
   let gameArea = document.getElementById("game-area");
   let newSideNum = parseInt(document.getElementById("side-length").value);
+  newSideNum = validateInput(newSideNum);
   gameArea.style.cssText = "display: grid;";
   gameArea.style.gridTemplateColumns = "repeat(" + newSideNum + ", 40px)";
   gameArea.style.gridTemplateRows = "repeat(" + newSideNum + ", 40px)";
@@ -35,6 +36,16 @@ function makeSquares() {
     gameArea.appendChild(div);
   }
   sideNum = newSideNum;
+}
+
+function validateInput(newSideNum) {
+  if (Number.isNaN(newSideNum) || newSideNum < 0 || newSideNum > 200 || (newSideNum % 1) > 0){
+    alert("Invalid input! Please try again with a whole number between 0 and 200.");
+    document.getElementById("side-length").value = "";
+    return 0;
+  } else {
+    return newSideNum;
+  }
 }
 
 /* Return a random Boolean with a (1 / probabilityOfMine) chance of being true */
