@@ -15,7 +15,7 @@ h1 {
 /* Help ===================================================================================================== */
 #help-button {
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 1.8em;
   right: 1.8em;
   height: 3em;
@@ -37,6 +37,7 @@ h1 {
 
 .show-help {
   display: block;
+  overflow-y: scroll;
   position: fixed;
   padding: 1em;
   margin: 1em;
