@@ -25,10 +25,8 @@ function makeSquares() {
   let gameArea = document.getElementById("game-area");
   let newSideNum = parseInt(document.getElementById("side-length").value);
   newSideNum = validateInput(newSideNum);
-  gameArea.style.display = "grid";
   gameArea.style.gridTemplateColumns = "repeat(" + newSideNum + ", 40px)";
   gameArea.style.gridTemplateRows = "repeat(" + newSideNum + ", 40px)";
-  gameArea.style.gap = "4px";
   for (let i = 0; i < Math.pow(newSideNum, 2); i++) {
     let div = document.createElement("div");
     div.id = i;
