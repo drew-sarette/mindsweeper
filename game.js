@@ -25,7 +25,7 @@ function makeSquares() {
   let gameArea = document.getElementById("game-area");
   let newSideNum = parseInt(document.getElementById("side-length").value);
   newSideNum = validateInput(newSideNum);
-  gameArea.style.cssText = "display: grid;";
+  gameArea.style.display = "grid";
   gameArea.style.gridTemplateColumns = "repeat(" + newSideNum + ", 40px)";
   gameArea.style.gridTemplateRows = "repeat(" + newSideNum + ", 40px)";
   gameArea.style.gap = "4px";
@@ -61,14 +61,12 @@ function writeToMap() {
 
 /* Check if the clicked square was a mine, then apply the appropriate CSS class. */
 function handleMove(e) {
-  let clickedSquare = parseInt(e.target.getAttribute("id")); //this seems bad! Need to convert the id attribute to a number
+  let clickedSquare = parseInt(e.target.getAttribute("id"));
   if (map[clickedSquare] === true) {
-    //e.target.style.background = "red";
     e.target.classList.add("mine");
   } else {
-    //e.target.style.background = "gray";
-    e.target.innerHTML = countMines(clickedSquare);
-    e.target.classList.add("safe")
+    e.target.textContent = countMines(clickedSquare);
+    e.target.classList.add("safe");
   }
 }
 

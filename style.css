@@ -45,7 +45,8 @@ h1 {
 /* Game ================================================================================================================================ */
 #game-area {
   overflow-x: scroll;
-  overflow-y: scroll;
+  margin-top: 4px;
+  margin-bottom: 4em;
 }
 
 .game-square {
@@ -62,7 +63,7 @@ h1 {
 }
 
 .safe {
-  background-color: light-gray;
+  background-color: lightgray;
 }
 
 /* controls =========================================================================================================== */
@@ -96,14 +97,11 @@ h1 {
 }
 
 footer {
+  background-color: black;
   position: fixed;
   bottom: 0;
   width: 100%;
-  /* text-align: center; */
-}
-
-footer > p {
- text-align: center;
+  text-align: center;
 }
 
 /* Scrolling Container*/
@@ -123,6 +121,11 @@ footer > p {
       "controls game"
       "scroll-container game"
       "foot foot";
+    gap: 4px;
+  }
+  
+  #game-area {
+    margin-top: 0;
   }
 
   .banner {
