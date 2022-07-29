@@ -27,6 +27,7 @@ h1 {
 .show-help {
   display: block;
   position: fixed;
+  padding: 1em;
   top: 81.1px;
   left: 0;
   right: 0;
@@ -39,7 +40,13 @@ h1 {
   justify-content: space-around;
 }
 
-.help-item a {
+a:link, a {
+color: white
+}
+
+a:hover {
+  color: goldenrod;
+  font-weight: bold;
 }
 
 /* Game ================================================================================================================================ */
