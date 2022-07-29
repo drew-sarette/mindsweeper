@@ -16,7 +16,6 @@ function initialize() {
   for (let i = 0; i < numSquares; i++) {
     map.push(writeToMap());
     squares[i].addEventListener("click", handleMove);
-    //squares[i].setAttribute("id", i); // Is there a way I can get the number of the div from the event object to use in handleMove()? Storing it as an ID seems wrong.
   }
 }
 
@@ -38,7 +37,9 @@ function makeSquares() {
 
 function validateInput(newSideNum) {
   if (Number.isNaN(newSideNum) || newSideNum < 0 || newSideNum > 200) {
-    alert("Invalid input! Please try again with a whole number between 0 and 200.");
+    alert(
+      "Invalid input! Please try again with a whole number between 0 and 200."
+    );
     document.getElementById("side-length").value = "";
     return 0;
   } else {
@@ -62,12 +63,44 @@ function handleMove(e) {
   let clickedSquare = parseInt(e.target.getAttribute("id"));
   if (map[clickedSquare] === true) {
     e.target.classList.add("mine");
+    youLose();
   } else {
     e.target.textContent = countMines(clickedSquare);
     e.target.classList.add("safe");
+    checkForWin();
   }
 }
 
+function checkForWin() {
+  let youWon = true;
+  let squares = document.getElementsByClassName("game-square");
+  for (let i = 0; i < squares.length; i++) {
+    if (map[i] === false && squares[i].classList.contains("safe") === false) {
+      youWon = false;
+    }
+  }
+  if (youWon) {
+    for (let i = 0; i < squares.length; i++) {
+    if (map[i]){
+      squares[i].innerHTML = "&#128526;";
+    }
+  }
+  alert("Congratulations!");
+}
+}
+
+function youLose() {
+  let squares = document.getElementsByClassName("game-square");
+  for (let i = 0; i < squares.length; i++) {
+    let square = squares[i];
+    square.removeEventListener("click", handleMove);
+    if (map[i] === true) {
+      squares[i].classList.add("mine");
+    } else {
+      squares[i].classList.add("safe");
+    }
+  }
+}
 /* Create an array containing all adjacent indexes, then remove the ones that are "off of the map".  Check map[] at each index to count the mines. */
 function countMines(position) {
   let adjacentIndexes = [];
