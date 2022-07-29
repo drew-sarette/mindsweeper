@@ -8,6 +8,9 @@ This began as a side-project, to learn event listeners. Because I thought it was
 
 I started this on codepen.io, and then started my repository when I decided to make it my project. Here is a link to the [original codepen](https://codepen.io/blergermeistermeisterblerger/pen/PoRNNgO).
 
+## Another Note
+The CSS animation code is from a tutorial online, copied and pasted in order to be studied and reworked. It is from Jamie Juviler's [tutorial](https://blog.hubspot.com/website/scrolling-text-css)
+
 ## Project Requirements
 ---
 - CSS feature 1: Uses Flexbox for the mobile layout and switches to Grid for tablet and desktop.
