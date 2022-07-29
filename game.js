@@ -39,7 +39,7 @@ function makeSquares() {
 }
 
 function validateInput(newSideNum) {
-  if (Number.isNaN(newSideNum) || newSideNum < 0 || newSideNum > 200 || (newSideNum % 1) > 0){
+  if (Number.isNaN(newSideNum) || newSideNum < 0 || newSideNum > 200) {
     alert("Invalid input! Please try again with a whole number between 0 and 200.");
     document.getElementById("side-length").value = "";
     return 0;
@@ -63,10 +63,12 @@ function writeToMap() {
 function handleMove(e) {
   let clickedSquare = parseInt(e.target.getAttribute("id")); //this seems bad! Need to convert the id attribute to a number
   if (map[clickedSquare] === true) {
-    e.target.style.background = "red";
+    //e.target.style.background = "red";
+    e.target.classList.add("mine");
   } else {
-    e.target.style.background = "gray";
+    //e.target.style.background = "gray";
     e.target.innerHTML = countMines(clickedSquare);
+    e.target.classList.add("safe")
   }
 }
 

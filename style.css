@@ -48,14 +48,6 @@ h1 {
   overflow-y: scroll;
 }
 
-.mine {
-  background-color: red;
-}
-
-.safe {
-  background-color: light-gray;
-}
-
 .game-square {
   background-color: white;
   color: black;
@@ -63,6 +55,14 @@ h1 {
   line-height: 40px;
   font-weight: bold;
   font-size: x-large;
+}
+
+.mine {
+  background-color: red;
+}
+
+.safe {
+  background-color: light-gray;
 }
 
 /* controls =========================================================================================================== */
@@ -96,7 +96,14 @@ h1 {
 }
 
 footer {
-  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* text-align: center; */
+}
+
+footer > p {
+ text-align: center;
 }
 
 /* Scrolling Container*/
@@ -130,12 +137,13 @@ footer {
     grid-area: controls;
   }
 
-  .scroll-container {          /* thanks to Jamie Juviler's tutorial at https://blog.hubspot.com/website/scrolling-text-css */
+  .scroll-container {          
     grid-area: scroll-container;
     display: block;
     overflow: hidden;
 
   }
+/* thanks to Jamie Juviler's tutorial at https://blog.hubspot.com/website/scrolling-text-css */
 /* animation not for evaluation as part of project, coppied and pasted for learning purposes, soon to be reworked */
   .scroll-text {
     height: 100%;
