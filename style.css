@@ -92,11 +92,15 @@ a:hover {
 }
 
 .mine {
-  background-color: red;
+  background-color: red !important;
 }
 
 .safe {
   background-color: lightgray;
+}
+
+.flagged {
+   background-color: yellow;
 }
 
 /* controls =========================================================================================================== */

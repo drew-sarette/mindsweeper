@@ -1,155 +1,120 @@
 /* Global Variables */
-let squares = [];
-let map = [];
-let sideNum = 4;
-
+const mindsweeper = [];
+let hardMode = true;
+const gameArea = document.getElementById('game-area');
 const startBtn = document.getElementById("start");
+const sizeInput = document.getElementById('size-input')
+
 startBtn.addEventListener("click", initialize);
 
 /* Create an array with a boolean for each div, representing the presence of a mine. Set a click-event listener for each square.  */
 function initialize() {
-  document.getElementById("game-area").innerHTML = "";
-  makeSquares();
-  let squares = document.getElementsByClassName("game-square");
-  let numSquares = squares.length;
-  map = [];
-  for (let i = 0; i < numSquares; i++) {
-    map.push(writeToMap());
-    squares[i].addEventListener("click", handleMove);
+  const size = Number(sizeInput.value);
+  while(mindsweeper.length) mindsweeper.pop();
+  gameArea.innerHTML = null;
+  gameArea.style.gridTemplateColumns = "repeat(" + size + ", 40px)";
+  gameArea.style.gridTemplateRows = "repeat(" + size + ", 40px)";
+  for (let row = 0; row < size; row++){
+    mindsweeper.push([]) 
+    for(let col = 0; col < size; col++){
+      mindsweeper[row].push(makeSquare(row, col));
+      gameArea.appendChild(mindsweeper[row][col].div);
+    }
   }
+  console.log(mindsweeper);
 }
 
-/*Empty the game area and refill it with the specified number of squares */
-function makeSquares() {
-  let gameArea = document.getElementById("game-area");
-  let newSideNum = parseInt(document.getElementById("side-length").value);
-  newSideNum = validateInput(newSideNum);
-  gameArea.style.gridTemplateColumns = "repeat(" + newSideNum + ", 40px)";
-  gameArea.style.gridTemplateRows = "repeat(" + newSideNum + ", 40px)";
-  for (let i = 0; i < Math.pow(newSideNum, 2); i++) {
-    let div = document.createElement("div");
-    div.id = i;
-    div.classList.add("game-square");
-    gameArea.appendChild(div);
-  }
-  sideNum = newSideNum;
-}
-
-function validateInput(newSideNum) {
-  if (Number.isNaN(newSideNum) || newSideNum < 0 || newSideNum > 200) {
-    alert(
-      "Invalid input! Please try again with a whole number between 0 and 200."
-    );
-    document.getElementById("side-length").value = "";
-    return 0;
-  } else {
-    return newSideNum;
-  }
-}
-
-/* Return a random Boolean with a (1 / probabilityOfMine) chance of being true */
-function writeToMap() {
-  const probabilityOfMine = 5;
-  let someNum = Math.floor(Math.random() * probabilityOfMine);
-  if (someNum === 0) {
-    return true;
-  } else {
-    return false;
+function makeSquare(row, col) {
+  const div = document.createElement('div');
+  div.classList.add('game-square');
+  div.addEventListener('mousedown', () => handleMove(row, col));
+  return {
+    div: div,
+    row: row,
+    col: col,
+    isMine: (Math.floor(Math.random() * 5) === 0),
+    clicked: false,
+    flagged: false
   }
 }
 
 /* Check if the clicked square was a mine, then apply the appropriate CSS class. */
-function handleMove(e) {
-  let clickedSquare = parseInt(e.target.getAttribute("id"));
-  if (map[clickedSquare] === true) {
-    e.target.classList.add("mine");
-    youLose();
-  } else {
-    e.target.textContent = countMines(clickedSquare);
-    e.target.classList.add("safe");
-    checkForWin();
-  }
+function handleMove(row, col) {
+  const square = mindsweeper[row][col];
+  let longClick = false;
+  setTimeout(() => { longClick = true }, 400);
+  square.div.addEventListener('mouseup', () => {
+    if (longClick) {
+      if (square.flagged)  {
+        square.flagged = false;
+        square.div.classList.remove('flagged');
+        square.div.textContent = null;
+      }
+      square.flagged = true;
+      square.div.textContent = 'F';
+      square.div.classList.add('flagged');
+    }
+    else {
+      if (square.isMine) {
+        youLose();
+      }
+      else {
+        square.div.textContent = countAdjacentMines(row, col);
+        if (hardMode) {
+          setTimeout(() => { square.div.textContent = null}, 2000);
+        }
+        if (youWon()) {
+          const winnerObj = {
+            name: prompt('Congratulations!  Enter your name to post your score.'),
+            gameState: mindsweeper
+          }
+          Object.freeze(winnerObj);
+        }
+      }
+    }
+  })
+  
+
 }
 
-function checkForWin() {
+function youWon() {
   let youWon = true;
-  let squares = document.getElementsByClassName("game-square");
-  for (let i = 0; i < squares.length; i++) {
-    if (map[i] === false && squares[i].classList.contains("safe") === false) {
-      youWon = false;
+  for (row = 0; row < mindsweeper.length; row ++){
+    for (col = 0; col < mindsweeper.length; col++){
+      if (!mindsweeper[row][col].isMine && !mindsweeper[row][col].clicked) {
+        youWon = false;
+      }
     }
   }
-  if (youWon) {
-    for (let i = 0; i < squares.length; i++) {
-    if (map[i]){
-      squares[i].innerHTML = "&#128526;";
-    }
-  }
-  alert("Congratulations!");
-}
+  return youWon; 
 }
 
 function youLose() {
-  let squares = document.getElementsByClassName("game-square");
-  for (let i = 0; i < squares.length; i++) {
-    let square = squares[i];
-    square.removeEventListener("click", handleMove);
-    if (map[i] === true) {
-      squares[i].classList.add("mine");
-    } else {
-      squares[i].classList.add("safe");
+  for (row = 0; row < mindsweeper.length; row ++){
+    for (col = 0; col < mindsweeper.length; col++){
+      const square = mindsweeper[row][col];
+      if (square.isMine) {
+        square.div.classList.add('mine');
+      }
+      else if (!square.clicked ) {
+        square.div.classList.add('safe');
+        square.div.textContent = countAdjacentMines(row, col);
+      }
     }
   }
 }
 /* Create an array containing all adjacent indexes, then remove the ones that are "off of the map".  Check map[] at each index to count the mines. */
-function countMines(position) {
-  let adjacentIndexes = [];
-  let numMines = 0;
-  adjacentIndexes.push(
-    position - sideNum - 1,
-    position - sideNum,
-    position - sideNum + 1
-  );
-  adjacentIndexes.push(position - 1, position + 1);
-  adjacentIndexes.push(
-    position + sideNum - 1,
-    position + sideNum,
-    position + sideNum + 1
-  );
-  adjacentIndexes = eliminateEdgeCases(adjacentIndexes, position);
-  adjacentIndexes.forEach((element) => {
-    if (map[element] === true) {
-      numMines++;
-    }
+function countAdjacentMines(row, col) {
+  let adjacentMinesCounter = 0;
+  const adjacentCoordinates = [
+    [row - 1, col - 1], [row - 1, col], [row - 1, col + 1],
+    [row, col - 1], [row, col + 1],
+    [row + 1, col -1], [row + 1, col], [row + 1, col +1]
+  ]
+  const size = mindsweeper.length;
+adjacentCoordinates.forEach(([row, col]) => {
+  if (row < 0 || col < 0 || row >= size || col >= size) return;
+  if (mindsweeper[row][col].isMine) adjacentMinesCounter++;
   });
-  return numMines;
-}
-
-/*Test if the clicked square was on any edges, and take out the adjacent indexes that are off the edge
-Tried using splice() to actually remove the elements and shorten the array, but it also left them present with a value of null*/
-function eliminateEdgeCases(adjacentIndexes, position) {
-  if (position % sideNum === 0) {
-    //on left edge of map, remove left side of adjacentIndexes
-    adjacentIndexes[0] = null;
-    adjacentIndexes[3] = null;
-    adjacentIndexes[5] = null;
-  } else if (position % sideNum === sideNum - 1) {
-    //on right edge of map, remove right side
-    adjacentIndexes[2] = null;
-    adjacentIndexes[4] = null;
-    adjacentIndexes[7] = null;
-  }
-
-  if (position < sideNum - 1) {
-    // on top edge, remove top
-    adjacentIndexes[0] = null;
-    adjacentIndexes[1] = null;
-    adjacentIndexes[2] = null;
-  } else if (position > Math.pow(sideNum, 2) - sideNum - 1) {
-    // on bottom edge, remove bottom
-    adjacentIndexes[5] = null;
-    adjacentIndexes[6] = null;
-    adjacentIndexes[7] = null;
-  }
-  return adjacentIndexes;
+  return adjacentMinesCounter;
 }
