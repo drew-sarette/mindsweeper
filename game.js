@@ -14,10 +14,24 @@ function toggleMemoryMode() {
   memoryMode = memoryModeCheckBox.checked;
 }
 
+function forEach2D(arr2D, callback) {
+  const rowLength = arr2D.length;
+  for (let row = 0; row < rowLength; row++) {
+    const colLength = arr2D[row].length;
+    for (let col = 0; col < colLength; col++) {
+      callback(arr2D[row][col]);
+    }
+  }
+}
 
 /* Create an array with a boolean for each div, representing the presence of a mine. Set a click-event listener for each square.  */
 function initialize() {
-  const size = Number(sizeInput.value);
+  const size = validateSizeInput(sizeInput.value);
+  if (!size) {
+    sizeInput.value = null;
+    alert('Invalid input. Please enter a whole number between 0 and 101');
+    return;
+  }
   while (mindsweeper.length) mindsweeper.pop();
   gameArea.innerHTML = null;
   gameArea.style.gridTemplateColumns = "repeat(" + size + ", 40px)";
@@ -28,6 +42,16 @@ function initialize() {
       mindsweeper[row].push(makeSquare(row, col));
       gameArea.appendChild(mindsweeper[row][col].div);
     }
+  }
+}
+
+function validateSizeInput(input) {
+  const size = Number(input);
+  if (isNaN(size) || size > 100 || size < 1|| size % 1){
+    return null;
+  }
+  else {
+    return size;
   }
 }
 
