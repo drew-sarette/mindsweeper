@@ -167,19 +167,19 @@ footer {
 
 /* For medium screens ======================================================*/
 @media only screen and (min-width: 768px) {
+  html {
+    height: 100%;
+  }
   body {
+    height: 100%;
     display: grid;
     grid-template-columns: 250px auto;
     grid-template-rows: fit-content fit-content auto fit-content;
     grid-template-areas:
       "banner banner"
-      "controls game"
+      "scroll-container controls"
       "scroll-container game"
       "foot foot";
-  }
-
-  #game-area {
-    margin-top: 0;
   }
 
   .banner {
@@ -192,13 +192,11 @@ footer {
 
   .controls {
     grid-area: controls;
-    height: auto;
-    background-image: linear-gradient(#041a09, black);
+    width: 50%;
   }
-
-  .controls * {
-    height: 69px;
-  }
+   #game-area {
+    grid-area: game;
+   }
 
   .scroll-container {
     grid-area: scroll-container;
@@ -268,8 +266,8 @@ footer {
 @media only screen and (min-width: 992px) {
   body {
     display: grid;
-    grid-template-columns: 250px 250px auto;
-    grid-template-rows: fit-content 80% fit-content;
+    grid-template-columns: fit-content fit-content auto;
+    grid-template-rows: fit-content auto max-content;
     grid-template-areas:
       "banner banner banner"
       "scroll-container controls game"
@@ -278,6 +276,7 @@ footer {
 
   #game-area {
     grid-area: game;
+    justify-self: ;
   }
 
   footer {
