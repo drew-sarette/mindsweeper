@@ -1,88 +1,128 @@
 :root {
-  --light-text: white;
-  --dark-text: black;
-  --light-background: #c0c0c0;
-  --dark-background: black;
+  --light-text: #EEEEEE;
+  --dark-text: #000000;
+  --light-background: #281e33;
+  --dark-background: #18131f;
+  --accent-red: #CF0A0A;
+  --accent-orange: #DC5F00;
+
+  --ms-highlight: #ffffff;
+  --ms-norm: #bdbdbd;
+  --ms-shadow: #7b7b7b;
 }
-  body {
-    background-color: var(--dark-background);
-    color: var(--light-text);
-    box-sizing: border-box;
-    font-family:  Arial, Helvetica, sans-serif;
-  }
-/* html {
-  height: 100%;
-  background-color: #000000;
-  color: white;
-} */
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-background);
+  color: var(--light-text);
+  box-sizing: border-box;
+  font-family: 'Rubik', Arial, Helvetica, sans-serif;
+}
+
+button {
+  border: none;
+  background-color: var(--ms-norm);
+  box-shadow: -3px -3px 2px var(--ms-shadow) inset, 3px 3px 2px var(--ms-highlight) inset;
+  transition-duration: 25ms;
+  transition-property: color, font-weight, box-shadow;
+  transition-timing-function: ease-in;
+}
+
+button:active, button:hover {
+  color: var(--accent-orange);
+  box-shadow: 3px 3px 2px var(--ms-shadow) inset, -3px -3px 2px var(--ms-highlight) inset;
+  font-weight: bold;
+}
 
 /* Banner==================================================================================================== */
 h1 {
   text-align: center;
 }
+
 /* Help ===================================================================================================== */
-#help-button {
-  position: fixed;
-  z-index: 2;
-  top: 1.8em;
-  right: 1.8em;
-  height: 3em;
-  width: 3em;
-  border-radius: 0;
-  background-color: #c0c0c0;
-  border: 2px solid #7b7b7b;
-  box-shadow: -3px -3px grey inset, 3px 3px #e3e3e3 inset;
-}
-
-#help-button:hover {
-  box-shadow: 3px 3px grey inset, -3px -3px #e3e3e3 inset;
-  font-weight: bold;
-}
-
 .help-area {
   display: none;
 }
 
-.show-help {
-  display: block;
-  position: absolute;
-  overflow-y: scroll;
-  padding: 1em;
-  margin: 1em;
-  border-radius: 4px;
-  top: 99px;
-  left: 0;
-  right: 0;
-  background-color: rgb(24, 19, 31);
+#help-button {
+  position: fixed;
+  z-index: 1;
+  top: 1.8em;
+  right: 1.8em;
+  height: 3em;
+  width: 3em;
 }
 
+.show-help {
+  color: var(--light-text);
+  display: block;
+  position: fixed;
+  top: 80.5px;
+  margin: .5em;
+  background-color: var(--light-background);
+  padding: 1em;
+  border-radius: 4px;
+}
 
 .help-item ul {
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
-ul > li {
+ul>li {
   width: 30%;
   text-align: center;
 }
 
 a:link,
+a:visited,
 a {
-  color: white;
-  transition-duration: 250ms;
+  color: inherit;
+  transition-duration: 100ms;
   transition-property: color, font-weight;
   transition-timing-function: ease-in;
 }
 
 a:hover {
-  color: goldenrod;
+  color:var(--accent-orange);
   font-weight: bold;
+}
+
+/* controls =========================================================================================================== */
+.controls {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  background: var(--ms-norm);
+  color: var(--dark-text);
+  padding: 1em;
+  box-shadow: 3px 3px 2px var(--ms-shadow) inset, -3px -3px 2px var(--ms-highlight) inset;
+}
+
+.input-container {
+  display: flex;
+  gap: 1em;
+}
+
+.input-container * {
+  min-height: 2.5em;
+  line-height:  2.5em;
+}
+
+.input-container input {
+  width: 4em;
+}
+
+.input-container button {
+  width: 150%;
 }
 
 /* Game ================================================================================================================================ */
 #game-area {
+  /* align-self: center; */
   overflow-x: scroll;
   margin-top: 1em;
   margin-bottom: 4em;
@@ -91,55 +131,30 @@ a:hover {
 }
 
 .game-square {
-  background-color: white;
-  color: black;
+  color: var(--dark-text);
+  font-size: 1.7em;
   text-align: center;
   line-height: 40px;
-  font-weight: bold;
-  font-size: x-large;
+  background-color: var(--ms-norm);
+  box-shadow: -3px -3px 2px var(--ms-shadow) inset, 3px 3px 2px var(--ms-highlight) inset;
 }
 
 .mine {
-  background-color: red !important;
+  box-shadow: none;
+  background-color: var(--accent-red);
 }
 
 .safe {
+  box-shadow: none;
   background-color: lightgray;
 }
 
 .flagged {
-   background-color: yellow;
-}
-
-/* controls =========================================================================================================== */
-.controls-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-}
-
-.controls-container button {
-  border-radius: 0;
-  background-color: #c0c0c0;
-  border: 2px solid #7b7b7b;
-  box-shadow: -3px -3px grey inset, 3px 3px #e3e3e3 inset;
-}
-
-.input-container {
-  display: flex;
-  gap: 1em;
-}
-
-.input-container input {
-  width: 4em;
+  box-shadow: none;
+  background-color: var(--accent-orange);
 }
 
 footer {
-  background-color: black;
-  position: fixed;
-  z-index: -1;
-  margin-top: 4em;
-  bottom: 0;
   width: 100%;
   text-align: center;
 }
@@ -190,6 +205,7 @@ footer {
     display: block;
     overflow: hidden;
   }
+
   /* thanks to Jamie Juviler's tutorial at https://blog.hubspot.com/website/scrolling-text-css */
   /* animation not for evaluation as part of project, coppied and pasted for learning purposes, soon to be reworked */
   .scroll-text {
@@ -211,6 +227,7 @@ footer {
     from {
       -moz-transform: translateY(100%);
     }
+
     to {
       -moz-transform: translateY(-100%);
     }
@@ -221,6 +238,7 @@ footer {
     from {
       -webkit-transform: translateY(100%);
     }
+
     to {
       -webkit-transform: translateY(-100%);
     }
@@ -232,12 +250,14 @@ footer {
       -webkit-transform: translateY(100%);
       transform: translateY(100%);
     }
+
     to {
       -moz-transform: translateY(-100%);
       -webkit-transform: translateY(-100%);
       transform: translateY(-100%);
     }
   }
+
   footer {
     grid-area: foot;
   }

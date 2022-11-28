@@ -10,6 +10,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
   <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script src="game.js" defer></script>
   <script src="index.js" defer></script>
@@ -27,7 +30,10 @@
         <h2>how to play</h2>
         <div>
           <p>
-            Enter a number from 1 to 100 to start a new Mindsweeper game. Click/tap and hold to flag a square as a possible mine, and repeat to unflag and check the same square. To win, you must click on each square that does not contain a mine! In memory mode, the number of adjacent mines will only appear temporarily. Good luck!
+            Enter a number from 1 to 100 to start a new Mindsweeper game. Click/tap and hold to flag a square as a
+            possible mine, and repeat to unflag and check the same square. To win, you must click on each square that
+            does not contain a mine! In memory mode, the number of adjacent mines will only appear temporarily. Good
+            luck!
           </p>
         </div>
       </div>
@@ -57,15 +63,15 @@
       </div>
     </div>
   </div>
-  <div class="controls-container">
+  <div class="controls">
     <div class="input-container">
       <label for="size-input">size:</label>
-      <input id="size-input" type="text" />
+      <input id="size-input" type="number" max="100" min="2" />
       <button id="start">start!</button>
     </div>
     <div class="input-container">
       <label for="memory-mode">memory mode:</label>
-      <input type="checkbox" id="memory-mode">
+      <input type="checkbox" id="memory-mode" class="checkbox">
     </div>
   </div>
   <div class="scroll-container">
@@ -79,9 +85,10 @@
       </p>
     </div>
   </div>
-  <div id="game-area"></div>
+  <div id="game-area" class="container"></div>
   <footer>
     <p>Drew Sarette, 2022</p>
   </footer>
 </body>
+
 </html>
