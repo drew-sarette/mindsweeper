@@ -1,12 +1,20 @@
-* {
-  box-sizing: border-box;
+:root {
+  --light-text: white;
+  --dark-text: black;
+  --light-background: #c0c0c0;
+  --dark-background: black;
 }
-  
-html {
+  body {
+    background-color: var(--dark-background);
+    color: var(--light-text);
+    box-sizing: border-box;
+    font-family:  Arial, Helvetica, sans-serif;
+  }
+/* html {
   height: 100%;
   background-color: #000000;
   color: white;
-}
+} */
 
 /* Banner==================================================================================================== */
 h1 {
@@ -104,44 +112,26 @@ a:hover {
 }
 
 /* controls =========================================================================================================== */
-.controls {
+.controls-container {
   display: flex;
-  justify-content: space-around;
-  align-items: stretch;
-  height: fit-content;
+  flex-direction: column;
   gap: 1em;
-  padding: 1em;
-  background-color: #041a09;
 }
 
-.controls * {
+.controls-container button {
+  border-radius: 0;
   background-color: #c0c0c0;
   border: 2px solid #7b7b7b;
-  padding: .4em;
-  height: 58.8px;
-}
-
-.controls > button {
-  flex-basis: 40%;
-  color: red;
   box-shadow: -3px -3px grey inset, 3px 3px #e3e3e3 inset;
 }
 
-.controls > button:hover {
-  box-shadow: 3px 3px grey inset, -3px -3px #e3e3e3 inset;
-  font-weight: bold;
+.input-container {
+  display: flex;
+  gap: 1em;
 }
 
-.controls > input {
-  color: #0000ff;
-  text-align: center;
+.input-container input {
   width: 4em;
-}
-
-.controls > label {
-  color: #007b00;
-  line-height:45px;
-  text-align: center;
 }
 
 footer {
