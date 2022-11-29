@@ -1,22 +1,23 @@
 # MindSweeper
 ---
-
-This is a simple version of Minesweeper. It takes user input in the form of a number, and then generates a square minesweeper field based on that. When a square is clicked, it either shows red to represent a mine, or displays the number of mines in adjacent squares. Mines are placed randomly each time, and there can be any number of mines in the field. Since there is not much supporting information required for this page, links were avoided in favor of a button that simply displays a div showing instructions, contact info, etc...
+This is a variant of Minesweeper. The player can enter a number between 1 and 100 to generate a map with randomly placed mines, and then click each square to reveal how many mines are around it. To flag a square as a potential mine, the player can click/press and hold. To win, all safe squares must be clicked. This game includes "memory-mode", which causes each number to disappear after 2 seconds for an extra challenge.
 
 ## Note:
-This began as a side-project, to learn event listeners. Because I thought it was much more interesting than my original project idea (studio website for violin teacher), I got permission to make this my project. So, the wireframe will not match.
+This is my final project for Web Development 1 at Code Louisville.  It began as a side project to practice event listeners, and turned out to be more fun than my original idea.
 
 I started this on codepen.io, and then started my repository when I decided to make it my project. Here is a link to the [original codepen](https://codepen.io/blergermeistermeisterblerger/pen/PoRNNgO).
 
-## Another Note
+## Features
+---
+- Utilizes objects and 2D arrays to store and manipulate game information
+- Grid and Flexbox for responsive layout
+- Dynamically generates HTML to display each game, without any framework.
+- Uses event listeners and setTimeout to trigger different functions depending on how long a square is pressed.
+
+
+## Credits
+
 The CSS animation code is from a tutorial online, copied and pasted in order to be studied and reworked. It is from Jamie Juviler's [tutorial](https://blog.hubspot.com/website/scrolling-text-css)
 
-## Project Requirements
----
-- CSS feature 1: Uses Flexbox for the mobile layout and switches to Grid for tablet and desktop.
-- CSS feature 2: Menu (accessible from the ? button) is displayed full screen on mobile and partial screen on desktop and tablet.
-- Javascript feature 1: Takes user input and calculates the square of that number.
-- Loops for the square of that number and dynamically creats a div each time.
-- Populates an array with random values to represent mines.
-- Dynamically adds event listeners to each generated div.
-- Uses JS to change CSS grid, color, add text content per requirements of the game.
+The icons are from [favicon.io](https://www.favicon.io)
+
