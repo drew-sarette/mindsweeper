@@ -29,15 +29,22 @@ button {
   transition-timing-function: ease-in;
 }
 
-button:active, button:hover {
+button:active,
+button:hover {
   color: var(--accent-orange);
   box-shadow: 3px 3px 2px var(--ms-shadow) inset, -3px -3px 2px var(--ms-highlight) inset;
   font-weight: bold;
 }
 
 /* Banner==================================================================================================== */
+.banner {
+  max-height: fit-content;
+}
 h1 {
   text-align: center;
+  text-transform: uppercase;
+  font-size: 3em;
+  text-shadow: 2px  2px var(--accent-orange);
 }
 
 /* Help ===================================================================================================== */
@@ -48,7 +55,7 @@ h1 {
 #help-button {
   position: fixed;
   z-index: 1;
-  top: 1.8em;
+  bottom: 1.8em;
   right: 1.8em;
   height: 3em;
   width: 3em;
@@ -58,8 +65,9 @@ h1 {
   color: var(--light-text);
   display: block;
   position: fixed;
-  top: 80.5px;
-  margin: .5em;
+  bottom: 5em;
+  margin: 1em;
+  overflow-y: auto;
   background-color: var(--light-background);
   padding: 1em;
   border-radius: 4px;
@@ -69,6 +77,7 @@ h1 {
   list-style: none;
   display: flex;
   justify-content: space-around;
+  padding: 0 0 0 0;
 }
 
 ul>li {
@@ -86,7 +95,7 @@ a {
 }
 
 a:hover {
-  color:var(--accent-orange);
+  color: var(--accent-orange);
   font-weight: bold;
 }
 
@@ -109,7 +118,7 @@ a:hover {
 
 .input-container * {
   min-height: 2.5em;
-  line-height:  2.5em;
+  line-height: 2.5em;
 }
 
 .input-container input {
@@ -170,20 +179,28 @@ footer {
   html {
     height: 100%;
   }
+
   body {
     height: 100%;
     display: grid;
     grid-template-columns: 250px auto;
-    grid-template-rows: fit-content fit-content auto fit-content;
+    grid-template-rows: min-content min-content auto min-content;
     grid-template-areas:
       "banner banner"
       "scroll-container controls"
       "scroll-container game"
       "foot foot";
+      gap: 1em;
   }
 
   .banner {
     grid-area: banner;
+  }
+
+  #help-button {
+    position: absolute;
+    right: 1em;
+    top: 1em;
   }
 
   .show-help {
@@ -194,9 +211,11 @@ footer {
     grid-area: controls;
     width: 50%;
   }
-   #game-area {
+
+  #game-area {
     grid-area: game;
-   }
+    margin: 0 0 0 0;
+  }
 
   .scroll-container {
     grid-area: scroll-container;
@@ -264,19 +283,47 @@ footer {
 /* for large screens ====================================================== */
 
 @media only screen and (min-width: 992px) {
+  html {
+    display: flex;
+    justify-content: center;
+  }
+
   body {
+    max-width: fit-content;
     display: grid;
-    grid-template-columns: fit-content fit-content auto;
-    grid-template-rows: fit-content auto max-content;
+    grid-template-rows: min-content auto min-content;
+    grid-template-columns: 250px auto min-content;
     grid-template-areas:
       "banner banner banner"
-      "scroll-container controls game"
+      "scroll-container game controls"
       "foot foot foot";
+  }
+
+  .banner {
+    position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+  }
+
+  #help-button {
+    justify-self: right;
+    position: static;
+    z-index: 0;
+   }
+
+  .controls {
+    align-self: flex-start;
+    justify-self: center;
+  }
+
+  .input-container:first-of-type {
+    flex-wrap: wrap;
   }
 
   #game-area {
     grid-area: game;
-    justify-self: ;
   }
 
   footer {

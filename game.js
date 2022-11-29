@@ -84,15 +84,16 @@ function handleMouseDown(square) {
 
 function checkMove(square) {
   [row, col] = [square.row, square.col];
+  square.clicked = true;
   if (square.isMine) {
     youLose();
   }
   else {
     square.div.classList.add('safe');
-    square.clicked = true;
+    
     square.div.textContent = countAdjacentMines(row, col);
     if (memoryMode) {
-      const timeoutID2 = setTimeout(() => { square.div.textContent = null }, 2000);
+      setTimeout(() => { square.div.textContent = null }, 2000);
     }
     if (youWon()) {
       const winnerObj = {
@@ -119,15 +120,16 @@ function toggleFlagState(square) {
 }
 
 function youWon() {
-  let youWon = true;
   for (row = 0; row < mindsweeper.length; row++) {
     for (col = 0; col < mindsweeper.length; col++) {
       if (!mindsweeper[row][col].isMine && !mindsweeper[row][col].clicked) {
-        youWon = false;
+        return false;
+      } else if (mindsweeper[row][col].isMine && mindsweeper[row][col].clicked){
+        return false;
       }
     }
   }
-  return youWon;
+  return true;
 }
 
 
