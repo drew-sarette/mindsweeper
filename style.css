@@ -40,11 +40,12 @@ button:hover {
 .banner {
   max-height: fit-content;
 }
+
 h1 {
   text-align: center;
   text-transform: uppercase;
   font-size: 3em;
-  text-shadow: 2px  2px var(--accent-orange);
+  text-shadow: 2px 2px var(--accent-orange);
 }
 
 /* Help ===================================================================================================== */
@@ -190,7 +191,7 @@ footer {
       "scroll-container controls"
       "scroll-container game"
       "foot foot";
-      gap: 1em;
+    gap: 1em;
   }
 
   .banner {
@@ -301,17 +302,17 @@ footer {
 
   .banner {
     position: relative;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 
   #help-button {
     justify-self: right;
     position: static;
     z-index: 0;
-   }
+  }
 
   .controls {
     align-self: flex-start;
