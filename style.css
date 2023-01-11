@@ -38,9 +38,7 @@ button:hover {
 }
 
 /* || BANNER */
-.banner {
-  max-height: fit-content;
-}
+
 
 h1 {
   text-align: center;
@@ -62,7 +60,7 @@ h1 {
   border-radius: 4px;
 }
 
-#help-button {
+.help-button {
   position: fixed;
   z-index: 1;
   bottom: 1.8em;
@@ -134,7 +132,7 @@ a:hover {
 }
 
 /* || GAME */
-#game-area {
+.game-area {
   /* align-self: center; */
   overflow-x: scroll;
   margin-top: 1em;
@@ -188,7 +186,7 @@ footer {
     height: 100%;
     display: grid;
     grid-template-columns: 250px auto;
-    grid-template-rows: min-content min-content auto min-content;
+    grid-template-rows: fit-content auto auto;
     grid-template-areas:
       "banner banner"
       "scroll-container controls"
@@ -199,26 +197,39 @@ footer {
 
   .banner {
     grid-area: banner;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
   }
 
-  #help-button {
-    position: absolute;
-    right: 1em;
-    top: 1em;
+  .help-button {
+    position: static;
+    justify-self: flex-end; /* cannot get h1 centered and button right aligned */
+    z-index: 0;
   }
 
   .help-area {
-    left: 60%;
+    z-index: 1;
+    left: 50%;
+    width: 500px;
+    top: 50%;
+    left: 50%;
+    height: fit-content;
+    transform: translate(-50%, -50%);
   }
 
   .controls {
     grid-area: controls;
-    width: 50%;
+    justify-self: start;
+    align-self: start;
   }
 
-  #game-area {
+  .game-area {
     grid-area: game;
     margin: 0 0 0 0;
+    height: 100vh;
+    min-width: 375px;
   }
 
   .scroll-container {
@@ -301,20 +312,6 @@ footer {
       "banner banner banner"
       "scroll-container game controls"
       "foot foot foot";
-  }
-
-  .banner {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  #help-button {
-    justify-self: right;
-    position: static;
-    z-index: 0;
   }
 
   .controls {
