@@ -1,3 +1,4 @@
+/* || GENERAL */
 :root {
   --light-text: #EEEEEE;
   --dark-text: #000000;
@@ -36,7 +37,7 @@ button:hover {
   font-weight: bold;
 }
 
-/* Banner==================================================================================================== */
+/* || BANNER */
 .banner {
   max-height: fit-content;
 }
@@ -48,9 +49,17 @@ h1 {
   text-shadow: 2px 2px var(--accent-orange);
 }
 
-/* Help ===================================================================================================== */
+/* || HELP */
 .help-area {
-  display: none;
+  color: var(--light-text);
+  position: absolute;
+  bottom: 5em;
+  top: 5em;
+  margin: 1em;
+  overflow-y: scroll;
+  background-color: var(--light-background);
+  padding: 1em;
+  border-radius: 4px;
 }
 
 #help-button {
@@ -62,17 +71,11 @@ h1 {
   width: 3em;
 }
 
-.show-help {
-  color: var(--light-text);
-  display: block;
-  position: fixed;
-  bottom: 5em;
-  margin: 1em;
-  overflow-y: auto;
-  background-color: var(--light-background);
-  padding: 1em;
-  border-radius: 4px;
+#close-help {
+  float: right;
 }
+
+
 
 .help-item ul {
   list-style: none;
@@ -100,7 +103,7 @@ a:hover {
   font-weight: bold;
 }
 
-/* controls =========================================================================================================== */
+/* || CONTROLS */
 .controls {
   align-self: center;
   display: flex;
@@ -130,7 +133,7 @@ a:hover {
   width: 150%;
 }
 
-/* Game ================================================================================================================================ */
+/* || GAME */
 #game-area {
   /* align-self: center; */
   overflow-x: scroll;
@@ -169,13 +172,13 @@ footer {
   text-align: center;
 }
 
-/* Scrolling Container*/
+/* || SCROLLING CONTAINER*/
 
 .scroll-container {
   display: none;
 }
 
-/* For medium screens ======================================================*/
+/* || MEDIA QUERY: MEDIUM*/
 @media only screen and (min-width: 768px) {
   html {
     height: 100%;
@@ -204,7 +207,7 @@ footer {
     top: 1em;
   }
 
-  .show-help {
+  .help-area {
     left: 60%;
   }
 
@@ -281,7 +284,7 @@ footer {
   }
 }
 
-/* for large screens ====================================================== */
+/* || MEDIA QUERY: LARGE */
 
 @media only screen and (min-width: 992px) {
   html {
@@ -330,4 +333,10 @@ footer {
   footer {
     grid-area: foot;
   }
+}
+
+/* || UTILITIES */
+
+.display-none {
+  display: none !important;
 }

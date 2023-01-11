@@ -1,5 +1,13 @@
-document.getElementById("help-button").addEventListener("click", toggleMenu);
+document.getElementById("help-button").addEventListener("click", toggleHelp);
+document.getElementById("close-help").addEventListener("click", toggleHelp);
 
-function toggleMenu() {
-    document.querySelector(".help-area").classList.toggle("show-help");
+function toggleHelp() {
+    const helpArea = document.querySelector(".help-area");
+    const isVisible = !(helpArea.classList.contains("display-none"));
+    console.log(`${helpArea} ${isVisible}`);
+    if (isVisible){
+        helpArea.classList.add("display-none");
+    } else {
+        helpArea.classList.remove("display-none");
+    }
 }
